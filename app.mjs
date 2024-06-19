@@ -23,24 +23,3 @@ app.post('/sensors-data', async (req, res) => {
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`)
 })
-
-
-
-/* const express = require('express')
-const app = express()
-
-const port = process.env.PORT
-
-const connectionString = process.env.CONNECTION_STRING
-
-app.get('/', (req,res) => {
-  res.send('hola mundo')
-})
-
-app.post('/sensors-data', (req, res) => {
-  
-})
-
-app.listen(port, () => {
-  console.log(`Listening on http://localhost:${port}`)
-}) */
