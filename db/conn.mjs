@@ -7,5 +7,5 @@ try {
 } catch(e) {
   console.error(e);
 }
-let db = conn.db("controlambiental");
+let db = conn.database("controlambiental");
 export default db;
