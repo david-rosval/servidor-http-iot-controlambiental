@@ -2,7 +2,7 @@ import express from 'express'
 import db from './db/conn.mjs'
 import cors from 'cors'
 
-const port = process.env.PORT
+const PORT = process.env.PORT ?? 1234
 const app = express()
 
 app.use(express.json())
@@ -22,6 +22,6 @@ app.post('/sensors-data', async (req, res) => {
   res.send(result).status(204)
 })
 
-app.listen(port, () => {
-  console.log(`Listening on http://localhost:${port}`)
+app.listen(PORT, () => {
+  console.log(`Listening on http://localhost:${PORT}`)
 })
