@@ -1,10 +1,12 @@
 import express from 'express'
 import db from './db/conn.mjs'
+import cors from 'cors'
 
 const port = process.env.PORT
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/sensors-data', async (req, res) => {
   let collection = await db.collection('sensores')
