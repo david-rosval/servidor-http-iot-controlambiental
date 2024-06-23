@@ -8,6 +8,10 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+app.get('/', (req, res) => {
+  res.json({ message: 'Conectado a la API controlambiental'})
+})
+
 app.get('/sensors-data', async (req, res) => {
   let collection = await db.collection('sensores')
   let results = await collection.find({}).toArray()
