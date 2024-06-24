@@ -18,8 +18,20 @@ app.get('/sensors-data', async (req, res) => {
   res.send(results).status(200)
 })
 
-app.get('/sensors-data/:data', (req, res) => {
-  res.json({ message: 'data' })
+app.get('/sensors-data/current', async (req, res) => {
+  const collection = await db.collection('sensores')
+  const result = await collection.findOne({}, { sort: { _id: -1 } })
+  res.send(result)
+})
+
+app.get('/sensors-data/last-:count', async (req, res) => {
+  const { count } = req.params
+  if (isNaN(count)) {
+    return res.json({ message: 'Invalid param, must be a integer. example: /last-5' })
+  }
+  const collection = await db.collection('sensores')
+  const result = await collection.find({}).sort({ _id: -1 }).limit(parseInt(count)).toArray()
+  res.send(result)
 })
 
 app.post('/sensors-data', async (req, res) => {
@@ -35,6 +47,12 @@ app.post('/sensors-data', async (req, res) => {
   const collection = await db.collection('sensores')
   const result = await collection.insertOne(newDocument)
   res.send(result).status(204)
+})
+
+app.delete('/sensors-data', async (req, res) => {
+  const collection = await db.collection('sensores')
+  const deleteResult = await collection.deleteMany({})
+  console.log('Deleted all documents =>', deleteResult)
 })
 
 const PORT = process.env.PORT ?? 1234
